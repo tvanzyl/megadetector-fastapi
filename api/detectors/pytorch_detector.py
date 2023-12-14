@@ -10,6 +10,7 @@ import sys
 
 import numpy as np
 import torch
+
 from api_utils import convert_yolo_to_xywh, download_yolov5, truncate_float, truncate_float_array
 from config import CONF_DIGITS, COORD_DIGITS, FAILURE_INFER, YOLOV5_DIR, YOLOV5_SRC_DIRNAME
 
@@ -42,6 +43,12 @@ class PTDetector:
         else:
             self.device = "cpu"
         self.model = PTDetector._load_model(model_path, self.device)
+
+        #Added to allow using later versions of torch up to 1.13
+        for m in self.model.modules():
+            if isinstance(m, torch.nn.Upsample):
+                m.recompute_scale_factor = None
+
         if (self.device != "cpu") and torch.cuda.is_available():
             logger.info("Sending model to GPU")
             self.model.to(self.device)

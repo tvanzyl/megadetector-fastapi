@@ -54,19 +54,13 @@ class MegaDetector:
                 logger.error(f"Error downloading model: {e}")
                 raise e
 
-    # Return left at Any to prevent tensorflow/pytorch specific import regardless of specified model version
+    # Return left at Any to prevent pytorch specific import regardless of specified model version
     def _get_model(self) -> Any:
         """Loads the specific model from the model path & returns the model object"""
         # -------------------------------------------------------------------------------------------
         # This is paraphrased from https://github.com/microsoft/CameraTraps/blob/main/detection/run_detector.py
         # -------------------------------------------------------------------------------------------
-        if self.model_file.endswith(".pb"):
-            start = time.perf_counter()
-            from detectors.tensorflow_detector import TFDetector
-
-            model = TFDetector(self.model_path)
-            logger.info(f"{self.model_file} loaded in {time.perf_counter()-start}s")
-        elif self.model_file.endswith(".pt"):
+        if self.model_file.endswith(".pt"):
             start = time.perf_counter()
             from detectors.pytorch_detector import PTDetector
 

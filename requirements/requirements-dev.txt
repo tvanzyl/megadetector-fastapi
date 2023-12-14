@@ -4,7 +4,6 @@
 
 # Install production dependencies for both pytorch & tensorflow versions
 -r requirements-pytorch.txt
--r requirements-tensorflow.txt
 
 # Code style & quality
 # ------------------------------------------------------------------------------

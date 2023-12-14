@@ -32,7 +32,6 @@ YOLOV5_SRC_DIRNAME = f"yolov5-{YOLOV5_COMMIT_HASH}"
 # Move env variables into config variables with meaingful defaults
 GOOGLE_PROJECT_ID = os.environ.get("GOOGLE_PROJECT_ID", None)
 
-
 # -------------------------------------------------------------------------------------------
 # This is copied from https://github.com/microsoft/CameraTraps/blob/main/detection/run_detector.py
 # -------------------------------------------------------------------------------------------
@@ -52,18 +51,21 @@ DETECTOR_METADATA = {}
 
 # Version availability is determined by the presence of tensorflow/pytorch availability
 
+
 # Add pytorch model versions & metadata if present
 if importlib.util.find_spec("torch") is not None:
     DETECTOR_METADATA.update(
         {
-            "v5a.0.0": {
-                "megadetector_version": "v5a.0.0",
+            ("megadetector","v5a.0.0"): {
+                "name": "megadetector",
+                "version": "5a.0.0",
                 "source_url": "https://github.com/microsoft/CameraTraps/releases/download/v5.0/md_v5a.0.0.pt",
                 "typical_detection_threshold": 0.2,
                 "conservative_detection_threshold": 0.05,
             },
-            "v5b.0.0": {
-                "megadetector_version": "v5b.0.0",
+            ("megadetector","v5b.0.0"): {
+                "name": "megadetector",
+                "version": "5b.0.0",
                 "source_url": "https://github.com/microsoft/CameraTraps/releases/download/v5.0/md_v5b.0.0.pt",
                 "typical_detection_threshold": 0.2,
                 "conservative_detection_threshold": 0.05,
@@ -71,31 +73,5 @@ if importlib.util.find_spec("torch") is not None:
         }
     )
 
-# Add tensorflow model versions & metadata if present
-if importlib.util.find_spec("tensorflow") is not None:
-    DETECTOR_METADATA.update(
-        {
-            "v4.1.0": {
-                "megadetector_version": "v4.1.0",
-                "source_url": "https://lilablobssc.blob.core.windows.net/models/camera_traps/megadetector/md_v4.1.0/md_v4.1.0.pb",
-                "typical_detection_threshold": 0.8,
-                "conservative_detection_threshold": 0.3,
-            },
-            "v3.0.0": {
-                "megadetector_version": "v3.0.0",
-                "source_url": "https://lilablobssc.blob.core.windows.net/models/camera_traps/megadetector/megadetector_v3.pb",
-                "typical_detection_threshold": 0.8,
-                "conservative_detection_threshold": 0.3,
-            },
-            "v2.0.0": {
-                "megadetector_version": "v2.0.0",
-                "source_url": "https://lilablobssc.blob.core.windows.net/models/camera_traps/megadetector/megadetector_v2.pb",
-                "typical_detection_threshold": 0.8,
-                "conservative_detection_threshold": 0.3,
-            },
-        }
-    )
-
-
-DEFAULT_RENDERING_CONFIDENCE_THRESHOLD = DETECTOR_METADATA["v5b.0.0"]["typical_detection_threshold"]
+DEFAULT_RENDERING_CONFIDENCE_THRESHOLD = DETECTOR_METADATA[("megadetector","v5a.0.0")]["typical_detection_threshold"]
 DEFAULT_OUTPUT_CONFIDENCE_THRESHOLD = 0.005

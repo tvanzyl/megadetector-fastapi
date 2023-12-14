@@ -1,12 +1,21 @@
 # Install base packages
+fastapi==0.105.0 # https://github.com/tiangolo/fastapi
+google-cloud-storage==2.5.0 # https://github.com/googleapis/python-storage
+httpx==0.23.0  # https://github.com/encode/httpx/
+Pillow==9.2.0  # https://github.com/python-pillow/Pillow
+python-dotenv==0.20.0 # https://github.com/theskumar/python-dotenv
+streamlit==1.12.2 # https://github.com/streamlit/streamlit
+uvicorn==0.18.3 # https://github.com/encode/uvicorn
+gunicorn==21.2.0
+python-multipart==0.0.6
 
--r requirements-base.txt
+# -r requirements-base.txt
+PyYAML==6.0.1 # https://github.com/yaml/pyyaml
 matplotlib==3.5.3 # https://github.com/matplotlib/matplotlib
 opencv-python-headless==4.6.0.66 # https://github.com/opencv/opencv-python
 pandas==1.4.3 # https://github.com/pandas-dev/pandas
-PyYAML==6.0 # https://github.com/yaml/pyyaml
 seaborn==0.11.2 # https://github.com/mwaskom/seaborn
 
-torch==1.9.1 # https://github.com/pytorch/pytorch
-torchvision==0.10.1 # https://github.com/pytorch/vision
+torch==1.13.1 # https://github.com/pytorch/pytorch
+torchvision==0.14.1 # https://github.com/pytorch/vision
 tqdm==4.64.0 # https://github.com/tqdm/tqdm
